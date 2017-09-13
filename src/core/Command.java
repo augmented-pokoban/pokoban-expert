@@ -18,21 +18,31 @@ public class Command {
 	static {
 		LinkedList< Command > cmds = new LinkedList< Command >();
 
-		for ( Direction d1 : Direction.values() ) {
-			for ( Direction d2 : Direction.values() ) {
-				if ( !Command.isOpposite( d1, d2 ) ) {
-					cmds.add( new Command( Type.Push, d1, d2 ) );
-				}
-			}
+//		for ( Direction d1 : Direction.values() ) {
+//			for ( Direction d2 : Direction.values() ) {
+//				if ( !Command.isOpposite( d1, d2 ) ) {
+//					cmds.add( new Command( Type.Push, d1, d2 ) );
+//				}
+//			}
+//		}
+
+		//Push: Only push in the same direction as the box
+		for (Direction dir : Direction.values()){
+			cmds.add(new Command(Type.Push, dir, dir));
 		}
+
+		//Pull: Only pull in the opposite direction of the box
 		for ( Direction d1 : Direction.values() ) {
 			for ( Direction d2 : Direction.values() ) {
-				if ( d1 != d2 ) {
+				//Replaced this such that we only pull in the opposite direction of the box
+				if(Command.isOpposite(d1, d2)){
+//				if ( d1 != d2 ) {
 					cmds.add( new Command( Type.Pull, d1, d2 ) );
 				}
 			}
 		}
 
+		//All move - unchanged
 		for ( Direction d : Direction.values() ) {
 			cmds.add( new Command( d ) );
 		}
