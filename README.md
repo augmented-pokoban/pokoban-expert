@@ -11,13 +11,54 @@ Actions:
 
 len(Actions) = 12
 
+## Server API:
 
+### Init
+Url: /game/init/{fileName}
+
+#### Reponse
+```json
 {
- initial: ...,
+ state: State,
+ map: <Content of file>,
+ gameID: string
+}
+´´´
+
+### Transistion
+Url: /game/{gameID}/{action}
+
+#### Response:
+```json
+{
+    state: State, 
+    action: string, 
+    reward: 
+    number, 
+    done: bool,
+    success: bool
+  }
+```
+
+## Output to file:
+```json
+{
+ initial: State
  transitions: [
-  {state (after action), action, reward, done}
+  {
+    state: State, 
+    action: string, 
+    reward: 
+    number, 
+    done: bool,
+    success: bool
+  }
  ]
 }
+```
+
+
+
 
 State representation:
 {
