@@ -16,7 +16,7 @@ public class Command {
 	 * Static initializer. Is run the first time the class is called.
 	 */
 	static {
-		LinkedList< Command > cmds = new LinkedList< Command >();
+		LinkedList< Command > cmds = new LinkedList<>();
 
 //		for ( Direction d1 : Direction.values() ) {
 //			for ( Direction d2 : Direction.values() ) {
@@ -47,9 +47,10 @@ public class Command {
 			cmds.add( new Command( d ) );
 		}
 
-		cmds.add(new Command());
+		//No need for the NoOp in single agent
+		//cmds.add(new Command());
 
-		every = cmds.toArray( new Command[0] );
+		every = cmds.toArray( new Command[cmds.size()] );
 	}
 
 	private static boolean isOpposite( Direction d1, Direction d2 ) {
@@ -60,7 +61,7 @@ public class Command {
 	 * Constructor
 	 * @param d
 	 */
-	public Command( Direction d ) {
+	private Command(Direction d) {
 		actType = Type.Move;
 		dir1 = d;
 		dir2 = null;
@@ -72,7 +73,7 @@ public class Command {
 		dir2 = null;
 	}
 
-	public Command( Type t, Direction d1, Direction d2 ) {
+	private Command(Type t, Direction d1, Direction d2) {
 		actType = t;
 		dir1 = d1;
 		dir2 = d2;

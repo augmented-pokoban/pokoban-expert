@@ -298,22 +298,12 @@ public class PlanMerger {
                             logger.error("\t\t" + res);
                         }
                     }
-
-                    System.exit(0);
                 }
 
-//                HashSet<Square> res = resources.getResources(time + i);
-
-//                logger.info("Resources size: " + res.size());
-//
-//                for (Square square : res) {
-//                    logger.topLevelAction(square.toString());
-//                }
-//
-//                System.err.println("");
             }
 
             logger.plan("# of moves: " + client.getCount());
+            client.terminate(result);
             return result;
         }
         return false;

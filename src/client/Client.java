@@ -2,23 +2,21 @@ package client;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import core.Agent;
-import core.Box;
-import core.Logger;
-import core.Memory;
+import akka.actor.SystemGuardian;
+import akka.actor.Terminated;
+import com.sun.corba.se.spi.activation.Server;
+import core.*;
 import enums.Color;
 import map.Level;
 import merging.MergeActor;
 import merging.PlanMerger;
 import planning.GoalPrioritizer;
 import planning.PlannerActor;
+import scala.concurrent.Await;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Anders on 24/04/16.
@@ -33,8 +31,7 @@ public class Client {
         Map< Character, Color> colors = new HashMap<>();
 
         String line;
-        int agentCol = -1, agentRow = -1;
-        int colorLines = 0, row = 0;
+        int row = 0;
 
         // Read lines specifying colors
         while ( ( line = serverMessages.readLine() ).matches( "^[a-z]+:\\s*[0-9A-Z](,\\s*[0-9A-Z])*\\s*$" ) ) {
@@ -45,7 +42,6 @@ public class Client {
             for ( String id : colonSplit[1].split( "," ) ) {
                 colors.put( id.trim().charAt( 0 ), color );
             }
-            colorLines++;
         }
 
         ArrayList<String> aList = new ArrayList<>();
@@ -79,10 +75,8 @@ public class Client {
                     walls[row][col] = true;
 
                 } else if (isAgent) { // Agents
-                    if ( agentCol == -1 && agentRow == -1 ) {
-                        agents.add(new Agent(row, col, Character.getNumericValue(chr), colors.get(chr)));
-                        //As long as we don't work on other states
-                    }
+                    agents.add(new Agent(row, col, Character.getNumericValue(chr), colors.get(chr)));
+                    //As long as we don't work on other states
 
                 } else if (isBox) { // Boxes
                     boxes.add(new Box(row, col, chr, colors.get(chr)));
@@ -94,6 +88,8 @@ public class Client {
             row++;
         }
 
+        Logger.global("Used commands:");
+        Arrays.stream(Command.every).forEach(cmd -> Logger.global(cmd.toString()));
 
         //This part is needed always. Sets the level
         Logger.global("Creating level...");
@@ -116,16 +112,25 @@ public class Client {
     }
 
     public static void main( String[] args ) throws Exception {
-        BufferedReader serverMessages = new BufferedReader( new InputStreamReader( System.in ) );
+
+        if(args.length == 0) {
+            System.out.println("No level file given");
+            System.exit(1);
+        }
+        ServerAPI server = new ServerAPI();
+        String level = server.initGame(args[0]);
 
         // Use stderr to print to console
         Logger.global("SearchClient initializing. I am sending this using the error output stream.");
 
-        Client client = new Client(serverMessages);
+        //TODO: How to parse this instead of a buffered reader
+        Client client = new Client(level);
 
         Logger.global(Memory.stringRep());
         ActorSystem system = ActorSystem.create("aimuffins");
-        ActorRef ref = system.actorOf(PlannerActor.props(client.agents, client.level, client.boxes, new ServerClient(serverMessages)));
+        system.actorOf(PlannerActor.props(client.agents, client.level, client.boxes, new ServerClient(server)));
+
+        system.whenTerminated().wait();
     }
 }
 

@@ -16,7 +16,7 @@ public abstract class Runner {
             runLevel = "-l ",
             runTime = "-g 0 -p ",
             runTimeOut = "",
-            runCommand = "-c "+ PLACEHOLDER + "java -Xmx1024m -classpath bin" + PATH_SEPARATOR + "lib/* client.Client" + PLACEHOLDER;
+            runCommand = "-c "+ PLACEHOLDER + "java -Xmx1024m -classpath out/production/pokoban-expert" + PATH_SEPARATOR + "lib/* client.Client" + PLACEHOLDER;
 
     public abstract ProcessBuilder getBuilder();
 

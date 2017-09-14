@@ -63,6 +63,10 @@ public class MergeActor extends AbstractActor {
 
                         if (!completed) {
                             sender().tell(new IncompleteSolutionMessage(planner.getNewestState()), self());
+                        } else {
+                            getContext()
+                                    .system()
+                                    .terminate();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -83,8 +87,6 @@ public class MergeActor extends AbstractActor {
                     } catch(Exception e){
                         e.printStackTrace();
                     }
-
-
                 })
                 .match(RequestNewStatesMessage.class, msg -> {
                     try {
