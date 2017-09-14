@@ -19,9 +19,9 @@ Url: /game/init/{fileName}
 #### Reponse
 ``` json
 {
- state: State,
- map: <Content of file>,
- gameID: string
+ "state": State,
+ "map": <Content of file>,
+ "gameID": string
 }
 ```
 
