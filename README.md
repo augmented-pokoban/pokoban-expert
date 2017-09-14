@@ -17,19 +17,19 @@ len(Actions) = 12
 Url: /game/init/{fileName}
 
 #### Reponse
-```json
+``` json
 {
  state: State,
  map: <Content of file>,
  gameID: string
 }
-´´´
+```
 
 ### Transistion
 Url: /game/{gameID}/{action}
 
 #### Response:
-```json
+``` json
 {
     state: State, 
     action: string, 
@@ -39,6 +39,12 @@ Url: /game/{gameID}/{action}
     success: bool
   }
 ```
+
+### Terminate
+Url: /game/{gameID}/terminate
+
+#### Response:
+None
 
 ## Output to file:
 ```json
@@ -58,27 +64,14 @@ Url: /game/{gameID}/{action}
 ```
 
 
+## State object
 
-
-State representation:
+```json
 {
-  boxes: [],
-  walls: [],
-  agents: [],
-  goals: [],
+  boxes: [{col: number, row: number, letter: string}, ...],
+  walls: [{col: number, row: number}],
+  agents: [{col: number, row: number}],
+  goals: [{col: number, row: number, letter: string}],
   dimensions: number (assuming square)
 }
-
-Where:
-
-* action: String-represention fra Pokoban-domænet
-* reward: number
-* done: boolean
-
-Todo:
-
-- Limit actions in expert
-- Interface: 
-- 0 eller 1 indexed?
-
-
+```
