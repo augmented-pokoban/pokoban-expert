@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 public class ServerAPI {
 
     private String gameID;
-    private final String baseAPI = "http://localhost:8080/";
+    private final String baseAPI = "http://localhost:8080/pokoban-server/";
     private JSONObject moves;
     /**
      * Initializes the game and returns the content of the level file.
@@ -30,7 +30,7 @@ public class ServerAPI {
 
         try{
             JSONObject result = Unirest
-                    .post(this.baseAPI + "game/" + levelFile)
+                    .post(this.baseAPI + levelFile)
                     .asJson()
                     .getBody()
                     .getObject();
@@ -58,7 +58,7 @@ public class ServerAPI {
 
         try{
             JSONObject result  = Unirest
-                    .post(this.baseAPI + "game/" + this.gameID + "/" + action.toString())
+                    .post(this.baseAPI + this.gameID + "/" + action.toString())
                     .asJson()
                     .getBody()
                     .getObject();
@@ -85,7 +85,7 @@ public class ServerAPI {
     public void terminateGame(boolean completed){
 
         // Connect api and kill game
-        Unirest.post(this.baseAPI + "game/" + this.gameID + "/terminate");
+        Unirest.post(this.baseAPI + this.gameID + "/terminate");
 
         //Only write out if completed
         if(completed){

@@ -31,7 +31,6 @@ public class Client {
         Map< Character, Color> colors = new HashMap<>();
 
         String[] lines = fileContent.split("\n");
-        int row = 0;
         int index;
         String line = lines[0];
 
@@ -74,7 +73,7 @@ public class Client {
             //Validate that the line is not empty
             if(line.equals("")) break;
 
-            maxCol = Math.max(maxCol, lines.length);
+            maxCol = Math.max(maxCol, line.length());
             aList.add(line);
         }
 
@@ -85,6 +84,7 @@ public class Client {
         boxes = new ArrayList<>();
         agents = new ArrayList<>();
 
+        int row = 0;
         for(String mapLine : aList){
             for ( int col = 0; col < mapLine.length(); col++ ) {
 
@@ -146,7 +146,7 @@ public class Client {
 
         // Use stderr to print to console
         Logger.global("SearchClient initializing. I am sending this using the error output stream.");
-        
+
         Client client = new Client(level);
 
         Logger.global(Memory.stringRep());
