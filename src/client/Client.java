@@ -27,14 +27,21 @@ public class Client {
     public List<Agent> agents;
     public List<Box> boxes;
 
-    public Client(BufferedReader serverMessages) throws Exception {
+    public Client(String fileContent) throws Exception {
         Map< Character, Color> colors = new HashMap<>();
 
-        String line;
+        String[] lines = fileContent.split("\n");
         int row = 0;
+        int index;
+        String line = lines[0];
 
         // Read lines specifying colors
-        while ( ( line = serverMessages.readLine() ).matches( "^[a-z]+:\\s*[0-9A-Z](,\\s*[0-9A-Z])*\\s*$" ) ) {
+        for(index = 0; index < lines.length; index++){
+            line = lines[index];
+
+            //Stop if line is not color defining
+            if(!line.matches("^[a-z]+:\\s*[0-9A-Z](,\\s*[0-9A-Z])*\\s*$")) break;
+
             line = line.replaceAll( "\\s", "" );
             String[] colonSplit = line.split( ":" );
             Color color = mapColor(colonSplit[0].trim());
@@ -43,16 +50,33 @@ public class Client {
                 colors.put( id.trim().charAt( 0 ), color );
             }
         }
+//
+//        while ( ( line = serverMessages.readLine() ).matches( "^[a-z]+:\\s*[0-9A-Z](,\\s*[0-9A-Z])*\\s*$" ) ) {
+//            line = line.replaceAll( "\\s", "" );
+//            String[] colonSplit = line.split( ":" );
+//            Color color = mapColor(colonSplit[0].trim());
+//
+//            for ( String id : colonSplit[1].split( "," ) ) {
+//                colors.put( id.trim().charAt( 0 ), color );
+//            }
+//        }
 
         ArrayList<String> aList = new ArrayList<>();
 
         int maxCol = 0;
         int maxRow;
-        do{
-            maxCol = Math.max(maxCol, line.length());
-            aList.add(line);
 
-        } while(!(line = serverMessages.readLine()).equals(""));
+
+        for(/* index already set from previously */; index < lines.length; index++){
+
+            line = lines[index];
+
+            //Validate that the line is not empty
+            if(line.equals("")) break;
+
+            maxCol = Math.max(maxCol, lines.length);
+            aList.add(line);
+        }
 
         maxRow = aList.size();
 
@@ -122,8 +146,7 @@ public class Client {
 
         // Use stderr to print to console
         Logger.global("SearchClient initializing. I am sending this using the error output stream.");
-
-        //TODO: How to parse this instead of a buffered reader
+        
         Client client = new Client(level);
 
         Logger.global(Memory.stringRep());

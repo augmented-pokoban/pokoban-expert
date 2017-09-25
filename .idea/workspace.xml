@@ -2,185 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d28f5b2-92f4-426e-a79d-cf40ae4b4c53" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/com_mashape_unirest_unirest_java_1_4_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_json_json_20170516.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/ServerAPI.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/Action.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/CreatePlan.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/MoveAgent.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/MoveBox.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/MoveCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/NotValid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/PlanClearPath.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/PlanMoveAgent.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/PlanSolvedEdge.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/RemoveBox.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/RemoveBoxes.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/SaveSpot.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/TopLevelAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/actions/ValidatePath.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/client/Client.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/client/ServerClient.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/Agent.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/Box.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/Command$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/Command.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/CompletedPlan.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/CouldNotMoveAgentException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/IllegalPlanException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/IncompletePlan.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/IncompletePlanException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/InvalidMoveException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/Logger.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/Memory.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/Result.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/RollBackMoveBoxPlanException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/State.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/UsedAllocatedResourceException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/WrongAgentColorException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/core/WrongColorPlan.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/enums/AgentStatus.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/enums/Color.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/enums/Diagonal.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/enums/Direction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/enums/SearchType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/enums/Type.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/Edge.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/Element.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/Field.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/GoalField.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/Graph.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/Level$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/Level.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/MinDistance.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/Node.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/Square.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/map/Wall.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/AgentStructure.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/AgentWrapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/BoxStructure.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/BoxWrapper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/CommandStructure.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/MergeActor$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/MergeActor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/MergeState.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/PlanMerger$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/PlanMerger.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/merging/ResourceStructure.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/AllCompletedMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/GetInitMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/GetNewestStateMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/IncompleteSolutionMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/InitMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/MergerResponse.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/NewestStateMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/NoNewStatesMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/RequestNewStatesMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/messages/StillNotWorkingMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/AgentActor$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/AgentActor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/AgentGoal.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/AgentPlanner.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/BlockingElements.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/ClearPathGoal.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/EdgeGoal.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/Goal.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/GoalOccurrence.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/GoalPrioritizer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/MoveGoal.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/NodeGoal.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/OccurrenceDetector.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/PlannerActor$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/PlannerActor$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/planning/PlannerActor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Heuristic$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Heuristic$AStar.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Heuristic$Greedy.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Heuristic$WeightedAStar.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Heuristic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Node$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Node.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/SearchClient.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Strategy$StrategyBFS.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Strategy$StrategyBestFirst.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Strategy$StrategyDFS.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Strategy$StrategyIDA.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/search/Strategy.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/serverrun/MacRunner.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/serverrun/RunServer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/serverrun/Runner.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/serverrun/WindowsRunner.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/actions/MoveAgent.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/actions/MoveBox.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/actions/PlanClearPath.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/actions/PlanSolvedEdge.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/actions/RemoveBox.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/actions/RemoveBoxes.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/actions/SaveSpot.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/actions/ValidatePath.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/client/Client.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/client/ServerClient.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/core/CompletedPlan.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/core/CouldNotMoveAgentException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/core/IllegalPlanException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/core/Memory.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/core/RollBackMoveBoxPlanException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/core/WrongColorPlan.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/enums/AgentStatus.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/merging/CommandStructure.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/merging/MergeActor$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/merging/MergeActor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/merging/MergeState.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/merging/PlanMerger$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/merging/PlanMerger.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/messages/AllCompletedMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/messages/GetInitMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/messages/GetNewestStateMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/messages/IncompleteSolutionMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/messages/MergerResponse.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/messages/NewestStateMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/messages/NoNewStatesMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/messages/RequestNewStatesMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/messages/StillNotWorkingMessage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/AgentActor$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/AgentActor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/AgentPlanner.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/BlockingElements.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/GoalOccurrence.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/GoalPrioritizer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/NodeGoal.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/OccurrenceDetector.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/PlannerActor$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/PlannerActor$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/planning/PlannerActor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Heuristic$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Heuristic$AStar.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Heuristic$Greedy.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Heuristic$WeightedAStar.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Heuristic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Node$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Node.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/SearchClient.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Strategy$StrategyBFS.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Strategy$StrategyBestFirst.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Strategy$StrategyDFS.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Strategy$StrategyIDA.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/search/Strategy.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/serverrun/RunServer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/serverrun/WindowsRunner.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/core/Command$1.class" afterPath="$PROJECT_DIR$/out/production/pokoban-expert/core/Command$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/core/Command.class" afterPath="$PROJECT_DIR$/out/production/pokoban-expert/core/Command.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/pokoban-expert/serverrun/Runner.class" afterPath="$PROJECT_DIR$/out/production/pokoban-expert/serverrun/Runner.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pokoban-expert.iml" afterPath="$PROJECT_DIR$/pokoban-expert.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/Client.java" afterPath="$PROJECT_DIR$/src/client/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/ServerClient.java" afterPath="$PROJECT_DIR$/src/client/ServerClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/ServerAPI.java" afterPath="$PROJECT_DIR$/src/client/ServerAPI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/Command.java" afterPath="$PROJECT_DIR$/src/core/Command.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/merging/MergeActor.java" afterPath="$PROJECT_DIR$/src/merging/MergeActor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/merging/PlanMerger.java" afterPath="$PROJECT_DIR$/src/merging/PlanMerger.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/serverrun/RunServer.java" afterPath="$PROJECT_DIR$/src/serverrun/RunServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/serverrun/Runner.java" afterPath="$PROJECT_DIR$/src/serverrun/Runner.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -199,8 +23,8 @@
       <file leaf-file-name="ServerClient.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/ServerClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="46" column="20" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+            <state relative-caret-position="210">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
                 <element signature="e#1052#1053#0" expanded="true" />
                 <element signature="e#1104#1105#0" expanded="true" />
@@ -212,11 +36,21 @@
       <file leaf-file-name="ServerAPI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/ServerAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/search/Node.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1367">
+              <caret line="263" column="16" lean-forward="false" selection-start-line="263" selection-start-column="16" selection-end-line="263" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -231,21 +65,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlanMerger.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlanMerger.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/merging/PlanMerger.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="289" column="0" lean-forward="true" selection-start-line="289" selection-start-column="0" selection-end-line="289" selection-end-column="0" />
+            <state relative-caret-position="287">
+              <caret line="290" column="20" lean-forward="true" selection-start-line="290" selection-start-column="20" selection-end-line="290" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BoxStructure.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/merging/BoxStructure.java">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2153">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            <state relative-caret-position="292">
+              <caret line="148" column="8" lean-forward="false" selection-start-line="148" selection-start-column="8" selection-end-line="148" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -307,14 +141,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/serverrun/RunServer.java" />
-        <option value="$PROJECT_DIR$/src/core/Command.java" />
         <option value="$PROJECT_DIR$/src/serverrun/Runner.java" />
         <option value="$PROJECT_DIR$/src/planning/PlannerActor.java" />
         <option value="$PROJECT_DIR$/src/merging/MergeActor.java" />
-        <option value="$PROJECT_DIR$/src/client/Client.java" />
-        <option value="$PROJECT_DIR$/src/client/ServerAPI.java" />
         <option value="$PROJECT_DIR$/src/client/ServerClient.java" />
         <option value="$PROJECT_DIR$/src/merging/PlanMerger.java" />
+        <option value="$PROJECT_DIR$/src/core/Command.java" />
+        <option value="$PROJECT_DIR$/src/client/ServerAPI.java" />
+        <option value="$PROJECT_DIR$/src/client/Client.java" />
       </list>
     </option>
   </component>
@@ -380,7 +214,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="merging" />
+              <option name="myItemId" value="search" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -757,14 +591,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="52" column="57" lean-forward="false" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/serverrun/Runner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -861,28 +687,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/Client.java">
+    <entry file="file://$PROJECT_DIR$/src/merging/PlanMerger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="124" column="0" lean-forward="true" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+        <state relative-caret-position="287">
+          <caret line="290" column="20" lean-forward="true" selection-start-line="290" selection-start-column="20" selection-end-line="290" selection-end-column="20" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/ServerAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/ServerClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="46" column="20" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+        <state relative-caret-position="210">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
             <element signature="e#1052#1053#0" expanded="true" />
             <element signature="e#1104#1105#0" expanded="true" />
@@ -890,10 +706,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/merging/PlanMerger.java">
+    <entry file="file://$PROJECT_DIR$/src/search/Node.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="289" column="0" lean-forward="true" selection-start-line="289" selection-start-column="0" selection-end-line="289" selection-end-column="0" />
+        <state relative-caret-position="1367">
+          <caret line="263" column="16" lean-forward="false" selection-start-line="263" selection-start-column="16" selection-end-line="263" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="95" column="41" lean-forward="true" selection-start-line="95" selection-start-column="41" selection-end-line="95" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/ServerAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="148" column="8" lean-forward="false" selection-start-line="148" selection-start-column="8" selection-end-line="148" selection-end-column="8" />
           <folding />
         </state>
       </provider>

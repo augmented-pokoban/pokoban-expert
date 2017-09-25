@@ -30,7 +30,7 @@ public class ServerAPI {
 
         try{
             JSONObject result = Unirest
-                    .get(this.baseAPI + "game/init/" + levelFile)
+                    .post(this.baseAPI + "game/" + levelFile)
                     .asJson()
                     .getBody()
                     .getObject();
@@ -58,7 +58,7 @@ public class ServerAPI {
 
         try{
             JSONObject result  = Unirest
-                    .get(this.baseAPI + "game/" + this.gameID + "/" + action.toString())
+                    .post(this.baseAPI + "game/" + this.gameID + "/" + action.toString())
                     .asJson()
                     .getBody()
                     .getObject();
@@ -85,7 +85,7 @@ public class ServerAPI {
     public void terminateGame(boolean completed){
 
         // Connect api and kill game
-        Unirest.get(this.baseAPI + "game/" + this.gameID + "terminate");
+        Unirest.post(this.baseAPI + "game/" + this.gameID + "/terminate");
 
         //Only write out if completed
         if(completed){
