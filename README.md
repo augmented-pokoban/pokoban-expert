@@ -11,33 +11,64 @@ Actions:
 
 len(Actions) = 12
 
+## Server API:
 
+### Init
+Url: /game/init/{fileName}
+
+#### Reponse
+``` json
 {
- initial: ...,
- transitions: [
-  {state (after action), action, reward, done}
+ "state": State,
+ "map": <Content of file>,
+ "gameID": string
+}
+```
+
+### Transistion
+Url: /game/{gameID}/{action}
+
+#### Response:
+``` json
+{
+    "state": State, 
+    "action": string, 
+    "reward": number, 
+    "done": bool,
+    "success": bool
+  }
+```
+
+### Terminate
+Url: /game/{gameID}/terminate
+
+#### Response:
+None
+
+## Output to file:
+```json
+{
+ "initial": State
+ "transitions": [
+  {
+    "state": State, 
+    "action": string, 
+    "reward": number, 
+    "done": bool,
+    "success": bool
+  }
  ]
 }
+```
 
-State representation:
+## State object
+
+```json
 {
-  boxes: [],
-  walls: [],
-  agents: [],
-  goals: [],
-  dimensions: number (assuming square)
+  "boxes": [{"col": number, "row": number, "letter": string}, ...],
+  "walls": [{"col": number, "row": number}],
+  "agents": [{"col": number, "row": number}],
+  "goals": [{"col": number, "row": number, "letter": string}],
+  "dimensions": number (assuming square)
 }
-
-Where:
-
-* action: String-represention fra Pokoban-domænet
-* reward: number
-* done: boolean
-
-Todo:
-
-- Limit actions in expert
-- Interface: 
-- 0 eller 1 indexed?
-
-
+```
