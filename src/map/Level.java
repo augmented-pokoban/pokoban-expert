@@ -1,7 +1,5 @@
 package map;
 
-import core.Agent;
-import core.Box;
 import core.Logger;
 import enums.Color;
 import enums.Diagonal;
@@ -77,13 +75,13 @@ public class Level {
         int col = square.col;
 
         switch (d){
-            case N: row += -1;
+            case North: row += -1;
                 break;
-            case S: row += 1;
+            case South: row += 1;
                 break;
-            case E: col += 1;
+            case East: col += 1;
                 break;
-            case W: col += -1;
+            case West: col += -1;
                 break;
         }
 
@@ -195,13 +193,13 @@ public class Level {
     protected static int getRow(Direction d, int row) {
 
         switch (d) {
-            case E:
+            case East:
                 return row;
-            case W:
+            case West:
                 return row;
-            case N:
+            case North:
                 return row - 1;
-            case S:
+            case South:
                 return row + 1;
             default:
                 return row;
@@ -210,13 +208,13 @@ public class Level {
 
     protected static int getCol(Direction d, int col) {
         switch (d) {
-            case N:
+            case North:
                 return col;
-            case S:
+            case South:
                 return col;
-            case E:
+            case East:
                 return col + 1;
-            case W:
+            case West:
                 return col - 1;
             default:
                 return col;
@@ -236,14 +234,14 @@ public class Level {
 			return false;
 		}
 		Square[] corner = new Square[8];
-		corner[0] = this.squares[getRow(Direction.N,square.row)][getCol(Direction.N, square.col)]; //N
-		corner[1] = this.squares[getRow(Direction.N,square.row)][getCol(Direction.E, square.col)]; //NE
-		corner[2] = this.squares[getRow(Direction.E,square.row)][getCol(Direction.E, square.col)];//E
-		corner[3] = this.squares[getRow(Direction.S,square.row)][getCol(Direction.E, square.col)]; //SE
-		corner[4] = this.squares[getRow(Direction.S,square.row)][getCol(Direction.S, square.col)]; //S
-		corner[5] = this.squares[getRow(Direction.S,square.row)][getCol(Direction.W, square.col)]; //SW
-		corner[6] = this.squares[getRow(Direction.W,square.row)][getCol(Direction.W, square.col)]; //W
-		corner[7] = this.squares[getRow(Direction.N,square.row)][getCol(Direction.W, square.col)]; //NW 
+		corner[0] = this.squares[getRow(Direction.North,square.row)][getCol(Direction.North, square.col)]; //North
+		corner[1] = this.squares[getRow(Direction.North,square.row)][getCol(Direction.East, square.col)]; //NE
+		corner[2] = this.squares[getRow(Direction.East,square.row)][getCol(Direction.East, square.col)];//East
+		corner[3] = this.squares[getRow(Direction.South,square.row)][getCol(Direction.East, square.col)]; //SE
+		corner[4] = this.squares[getRow(Direction.South,square.row)][getCol(Direction.South, square.col)]; //South
+		corner[5] = this.squares[getRow(Direction.South,square.row)][getCol(Direction.West, square.col)]; //SW
+		corner[6] = this.squares[getRow(Direction.West,square.row)][getCol(Direction.West, square.col)]; //West
+		corner[7] = this.squares[getRow(Direction.North,square.row)][getCol(Direction.West, square.col)]; //NW
 
 		
 		for(int i = 0; i < corner.length; i++)

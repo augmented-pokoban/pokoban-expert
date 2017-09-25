@@ -155,7 +155,7 @@ public abstract class Heuristic implements Comparator<Node> {
 
         public WeightedAStar(Node initialState) {
             super( initialState );
-            W = 5; // You're welcome to test this out with different values, but for the reporting part you must at least indicate benchmarks for W = 5
+            W = 5; // You're welcome to test this out with different values, but for the reporting part you must at least indicate benchmarks for West = 5
         }
 
         public int f( Node n ) {

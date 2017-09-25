@@ -153,7 +153,7 @@ public class Client {
         ActorSystem system = ActorSystem.create("aimuffins");
         system.actorOf(PlannerActor.props(client.agents, client.level, client.boxes, new ServerClient(server)));
 
-        system.whenTerminated().wait();
+        system.whenTerminated();
     }
 }
 

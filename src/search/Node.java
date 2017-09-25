@@ -11,8 +11,6 @@ import enums.SearchType;
 import enums.Type;
 import map.MinDistance;
 import map.Square;
-import planning.Goal;
-import planning.MoveGoal;
 
 
 public class Node {
@@ -32,7 +30,7 @@ public class Node {
 	// Row 2: (2,0) (2,1) (2,2) (2,3) ...
 	// ...
 	// (Start in the top left corner, first go down, then go right)
-	// E.g. walls[2] is an array of booleans having size MAX_GRID
+	// East.g. walls[2] is an array of booleans having size MAX_GRID
 	// walls[row][col] is true if there's a wall at (row, col)
 
 	public Node parent;
@@ -262,11 +260,11 @@ public class Node {
 	}
 
 	private int dirToRowChange( Direction d ) {
-		return ( d == Direction.S ? 1 : ( d == Direction.N ? -1 : 0 ) ); // South is down one row (1), north is up one row (-1)
+		return ( d == Direction.South ? 1 : ( d == Direction.North ? -1 : 0 ) ); // South is down one row (1), north is up one row (-1)
 	}
 
 	private int dirToColChange( Direction d ) {
-		return ( d == Direction.E ? 1 : ( d == Direction.W ? -1 : 0 ) ); // East is left one column (1), west is right one column (-1)
+		return ( d == Direction.East ? 1 : ( d == Direction.West ? -1 : 0 ) ); // East is left one column (1), west is right one column (-1)
 	}
 
 	/**

@@ -291,13 +291,14 @@ public class PlanMerger {
                 try{
                     result = client.move(commands.get(i));
                 } catch(InvalidMoveException e){
+                    /*
                     for(int j = 0; j < client.getCount() + 1; j++){
                         logger.error("Resources in time " + j + ":");
 
                         for(Square res : resources.getResources(j)){
                             logger.error("\t\t" + res);
                         }
-                    }
+                    } */
                 }
 
             }

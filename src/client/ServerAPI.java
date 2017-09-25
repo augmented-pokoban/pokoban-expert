@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import core.Command;
+import core.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -39,6 +40,9 @@ public class ServerAPI {
             this.gameID = result.getString("gameID");
             this.moves.put("initial", result.get("state"));
 
+
+            Logger.global(this.gameID);
+
             //Return the content of the file
             return result.getString("map");
 
@@ -73,10 +77,9 @@ public class ServerAPI {
 
         } catch(Exception e){
             e.printStackTrace();
+            System.out.println(this.baseAPI + this.gameID + "/" + action.toString());
+            return false;
         }
-
-        //TODO: Error handling?
-        return true;
     }
 
     /**
@@ -89,9 +92,9 @@ public class ServerAPI {
 
         //Only write out if completed
         if(completed){
-            try{
-                new PrintWriter(this.gameID)
-                        .println(this.moves.toString(2));
+            try(PrintWriter pw = new PrintWriter(this.gameID + ".json")){
+                pw.println(this.moves.toString(2));
+
             } catch(FileNotFoundException e){
                 e.printStackTrace();
                 //TODO: Error handling?

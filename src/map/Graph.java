@@ -436,7 +436,7 @@ public class Graph {
 		{		
 			for(Square sq : nodeList.get(i).nodes.values())
 			{
-				print[sq.row][sq.col] = "N" + nodeList.get(i).getNumber();
+				print[sq.row][sq.col] = "North" + nodeList.get(i).getNumber();
 			}
 		}
 		
@@ -444,7 +444,7 @@ public class Graph {
 		{
 			for(Square sq : edgeList.get(i).edges.values())
 			{
-				print[sq.row][sq.col] = "E" + edgeList.get(i).getNumber();
+				print[sq.row][sq.col] = "East" + edgeList.get(i).getNumber();
 			}
 		}
 				
@@ -498,7 +498,7 @@ public class Graph {
 		String print = "";
 		for(int i = 0; i < edgeList.size(); i++)
 		{
-			print += "E" + edgeList.get(i).getNumber();
+			print += "East" + edgeList.get(i).getNumber();
 			alNode = edgeList.get(i).getConnectedNode();
 			for(int j= 0; j < alNode.size(); j++)
 			{
@@ -510,7 +510,7 @@ public class Graph {
 		
 		for(int i = 0; i < nodeList.size(); i++)
 		{
-			print += "N" + nodeList.get(i).getNumber();
+			print += "North" + nodeList.get(i).getNumber();
 			alEdge = nodeList.get(i).getConnectedEdges();
 			for(int j= 0; j < alEdge.size(); j++)
 			{

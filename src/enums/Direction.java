@@ -5,5 +5,5 @@ package enums;
  */
 // Order of enum important for determining opposites
 public enum Direction {
-    N, W, E, S
+    North, West, East, South
 }
