@@ -189,11 +189,21 @@ public class PlannerActor extends AbstractActor {
                 })
                 .match(IncompleteSolutionMessage.class, msg -> {
                     if (!goalPrioritizer.allCompleted(msg.state)) {
-                        logger.error("Could not solve level. Received IncompleteSolution from PlanMerger.");
+                        logger.error("Could not solve level. Received IncompleteSolution from PlanMerger. Terminating...");
                         goalPrioritizer.print();
-
+                    } else {
+                        logger.error("IncompleteSolutionMessage received, but all goals solved. Terminating...");
                     }
 
+                    getContext().system().terminate();
+
+                })
+                .match(AllCompletedMessage.class, m -> {
+                    System.out.println("Terminating");
+
+                    getContext()
+                            .system()
+                            .terminate();
                 })
                 .match(WrongColorPlan.class, plan -> {
                     State state = plan.topLevelAction.getPreState();

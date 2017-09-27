@@ -27,7 +27,7 @@ public class ServerClient {
             boolean response = server.performAction(commands[0]);
 
             if(!response){
-                System.err.println("Move failed : time: " + count);
+                System.out.println("Move failed : time: " + count);
                 throw new InvalidMoveException();
             }
             count++;

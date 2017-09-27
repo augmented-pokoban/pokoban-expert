@@ -32,7 +32,7 @@ public class MergeActor extends AbstractActor {
         });
     }
 
-    public MergeActor(List<Agent> agents, List<Box> boxes, Level level, ServerClient client){
+    private MergeActor(List<Agent> agents, List<Box> boxes, Level level, ServerClient client){
         planner = new PlanMerger(agents, boxes, level, client);
     }
 
@@ -59,14 +59,13 @@ public class MergeActor extends AbstractActor {
 
                     try {
                         boolean completed = planner.commitRest();
+                        System.out.println("AllCompletedMessage in Merger. Level completed: " + completed);
                         planner.printAgentStatus();
 
                         if (!completed) {
                             sender().tell(new IncompleteSolutionMessage(planner.getNewestState()), self());
                         } else {
-                            getContext()
-                                    .system()
-                                    .terminate();
+                            sender().tell(new AllCompletedMessage(), self());
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

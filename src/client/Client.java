@@ -13,10 +13,13 @@ import merging.PlanMerger;
 import planning.GoalPrioritizer;
 import planning.PlannerActor;
 import scala.concurrent.Await;
+import scala.concurrent.Future;
+import scala.concurrent.duration.Duration;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Anders on 24/04/16.
@@ -153,7 +156,7 @@ public class Client {
         ActorSystem system = ActorSystem.create("aimuffins");
         system.actorOf(PlannerActor.props(client.agents, client.level, client.boxes, new ServerClient(server)));
 
-        system.whenTerminated();
+        Await.result(system.whenTerminated(), Duration.create(5, TimeUnit.MINUTES));
     }
 }
 

@@ -86,13 +86,14 @@ public class ServerAPI {
      * Terminates a game
      */
     public void terminateGame(boolean completed){
+        if(this.gameID == null) return;
 
         // Connect api and kill game
-        Unirest.post(this.baseAPI + this.gameID + "/terminate");
+        Unirest.delete(this.baseAPI + this.gameID);
 
         //Only write out if completed
         if(completed){
-            try(PrintWriter pw = new PrintWriter(this.gameID + ".json")){
+            try(PrintWriter pw = new PrintWriter("expert-moves/" + this.gameID + ".json")){
                 pw.println(this.moves.toString(2));
 
             } catch(FileNotFoundException e){

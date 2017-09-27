@@ -284,13 +284,14 @@ public class PlanMerger {
             int time = client.getCount();
             //Execute commands here
             int size = commands.size();
-            boolean result = false;
+            boolean result = true;
             for (int i = 0; i < size; i++) {
 //                logger.info("Conducting moveBox i: " + (time + i));
 
                 try{
                     result = client.move(commands.get(i));
                 } catch(InvalidMoveException e){
+                    System.out.println("InvalidMove Received");
                     /*
                     for(int j = 0; j < client.getCount() + 1; j++){
                         logger.error("Resources in time " + j + ":");
@@ -303,7 +304,7 @@ public class PlanMerger {
 
             }
 
-            logger.plan("# of moves: " + client.getCount());
+            logger.plan("# of moves: " + client.getCount() + " : Completed: " + result);
             client.terminate(result);
             return result;
         }
