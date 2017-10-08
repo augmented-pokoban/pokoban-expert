@@ -263,7 +263,10 @@ public class PlanMerger {
 
     public boolean commitRest(){
 
-        return commitCommands(this.commands.getRestOfCommands());
+        boolean result = commitCommands(this.commands.getRestOfCommands());
+        client.terminate(result);
+
+        return result;
     }
 
     /**
@@ -305,7 +308,6 @@ public class PlanMerger {
             }
 
             logger.plan("# of moves: " + client.getCount() + " : Completed: " + result);
-            client.terminate(result);
             return result;
         }
         return false;

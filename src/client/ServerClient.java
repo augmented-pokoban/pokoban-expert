@@ -23,21 +23,18 @@ public class ServerClient {
     public boolean move(Command[] commands) throws InvalidMoveException {
 
         //Assume that the first action is the right one
-        try{
-            boolean response = server.performAction(commands[0]);
 
-            if(!response){
-                System.out.println("Move failed : time: " + count);
-                throw new InvalidMoveException();
-            }
-            count++;
+        boolean response = server.performAction(commands[0]);
 
-            return true;
-
-        } catch(InvalidMoveException e){
-
-            throw e;
+        if (!response) {
+            System.out.println("Move failed : time: " + count);
+            throw new InvalidMoveException();
         }
+        count++;
+
+        return server.isCompleted();
+
+
     }
 
     public int getCount(){

@@ -59,6 +59,7 @@ public class MergeActor extends AbstractActor {
 
                     try {
                         boolean completed = planner.commitRest();
+
                         System.out.println("AllCompletedMessage in Merger. Level completed: " + completed);
                         planner.printAgentStatus();
 

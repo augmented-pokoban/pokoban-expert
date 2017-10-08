@@ -1,14 +1,11 @@
 package client;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import core.Command;
 import core.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
@@ -18,8 +15,9 @@ import java.io.PrintWriter;
 public class ServerAPI {
 
     private String gameID;
-    private final String baseAPI = "http://localhost:8080/pokoban-server/";
+    private final String baseAPI = "http://localhost:8080/pokoban-server/api/";
     private JSONObject moves;
+    private JSONObject lastMoveResult;
     /**
      * Initializes the game and returns the content of the level file.
      * @param levelFile The name of the level file.
@@ -39,7 +37,8 @@ public class ServerAPI {
             //Set initial state and gameID
             this.gameID = result.getString("gameID");
             this.moves.put("initial", result.get("state"));
-
+            this.moves.put("level", levelFile);
+            this.moves.put("id", this.gameID);
 
             Logger.global(this.gameID);
 
@@ -61,25 +60,28 @@ public class ServerAPI {
     boolean performAction(Command action){
 
         try{
-            JSONObject result  = Unirest
+            this.lastMoveResult  = Unirest
                     .post(this.baseAPI + this.gameID + "/" + action.toString())
                     .asJson()
                     .getBody()
                     .getObject();
 
-
             //result is a full transition: Add it to the trajectory
             this.moves
                     .getJSONArray("transitions")
-                    .put(result);
+                    .put(this.lastMoveResult);
 
-            return result.getBoolean("success");
+            return this.lastMoveResult.getBoolean("success");
 
         } catch(Exception e){
             e.printStackTrace();
             System.out.println(this.baseAPI + this.gameID + "/" + action.toString());
             return false;
         }
+    }
+
+    boolean isCompleted(){
+        return this.lastMoveResult.getBoolean("done");
     }
 
     /**
@@ -93,7 +95,8 @@ public class ServerAPI {
 
         //Only write out if completed
         if(completed){
-            try(PrintWriter pw = new PrintWriter("expert-moves/" + this.gameID + ".json")){
+            try(PrintWriter pw = new PrintWriter("expert-moves/"
+                    + this.moves.getString("level") + "-" + this.gameID + ".json")){
                 pw.println(this.moves.toString(2));
 
             } catch(FileNotFoundException e){
@@ -104,6 +107,7 @@ public class ServerAPI {
 
         this.gameID = null;
         this.moves = null;
+        this.lastMoveResult = null;
 
     }
 
