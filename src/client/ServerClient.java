@@ -42,6 +42,6 @@ public class ServerClient {
     }
 
     public void terminate(boolean completed){
-        this.server.terminateGame(completed);
+        this.server.terminateGame(completed,"Moves: " + count);
     }
 }

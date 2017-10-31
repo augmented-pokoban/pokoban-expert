@@ -1,13 +1,14 @@
 package client;
 
 import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import core.Command;
 import core.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Anders on 13/09/2017.
@@ -15,30 +16,25 @@ import java.io.PrintWriter;
 public class ServerAPI {
 
     private String gameID;
-    private final String baseAPI = "http://localhost:8080/pokoban-server/api/";
-    private JSONObject moves;
+    private static final String BASE_API = "http://localhost:8080/pokoban-server/api/";
     private JSONObject lastMoveResult;
+
     /**
      * Initializes the game and returns the content of the level file.
      * @param levelFile The name of the level file.
      * @return The level as a a string
      */
     String initGame(String levelFile){
-        this.moves = new JSONObject();
-        this.moves.put("transitions", new JSONArray());
 
         try{
             JSONObject result = Unirest
-                    .post(this.baseAPI + levelFile)
+                    .post(BASE_API + "pokoban/supervised/" + levelFile)
                     .asJson()
                     .getBody()
                     .getObject();
 
             //Set initial state and gameID
             this.gameID = result.getString("gameID");
-            this.moves.put("initial", result.get("state"));
-            this.moves.put("level", levelFile);
-            this.moves.put("id", this.gameID);
 
             Logger.global(this.gameID);
 
@@ -61,21 +57,16 @@ public class ServerAPI {
 
         try{
             this.lastMoveResult  = Unirest
-                    .post(this.baseAPI + this.gameID + "/" + action.toString())
+                    .put(BASE_API + "pokoban/" + this.gameID + "/" + action.toString())
                     .asJson()
                     .getBody()
                     .getObject();
-
-            //result is a full transition: Add it to the trajectory
-            this.moves
-                    .getJSONArray("transitions")
-                    .put(this.lastMoveResult);
 
             return this.lastMoveResult.getBoolean("success");
 
         } catch(Exception e){
             e.printStackTrace();
-            System.out.println(this.baseAPI + this.gameID + "/" + action.toString());
+            System.out.println(BASE_API + this.gameID + "/" + action.toString());
             return false;
         }
     }
@@ -87,27 +78,36 @@ public class ServerAPI {
     /**
      * Terminates a game
      */
-    public void terminateGame(boolean completed){
+    public void terminateGame(boolean completed, String description){
         if(this.gameID == null) return;
 
         // Connect api and kill game
-        Unirest.delete(this.baseAPI + this.gameID);
-
-        //Only write out if completed
-        if(completed){
-            try(PrintWriter pw = new PrintWriter("expert-moves/"
-                    + this.moves.getString("level") + "-" + this.gameID + ".json")){
-                pw.println(this.moves.toString(2));
-
-            } catch(FileNotFoundException e){
-                e.printStackTrace();
-                //TODO: Error handling?
-            }
+        try {
+            JSONObject obj = Unirest.delete(BASE_API + "pokoban/" + this.gameID + "?store=true&is_planner=true&description=" + description)
+                    .asJson()
+                    .getBody()
+                    .getObject();
+        } catch (UnirestException e) {
+            e.printStackTrace();
         }
 
         this.gameID = null;
-        this.moves = null;
-        this.lastMoveResult = null;
+    }
+
+    public static List<String> getLevels() throws Exception{
+
+        List<String> list = new ArrayList<>();
+
+        JSONArray array = Unirest.get(BASE_API + "levels/supervised")
+                .asJson()
+                .getBody()
+                .getArray();
+
+        for (int i = 0; i < array.length(); i++) {
+            list.add(array.getString(i));
+        }
+
+        return list;
 
     }
 
