@@ -7,8 +7,8 @@ public class GoalField extends Square {
 	private char letter;
 	private Color color;
 	
-	public GoalField(int row, int col, char letter, Color color){
-		super(row,col);
+	public GoalField(int row, int col, char letter, Color color, Level level){
+		super(row,col, level);
 		this.letter = letter;
 		this.color = color;
 	}

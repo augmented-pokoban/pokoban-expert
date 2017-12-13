@@ -222,9 +222,9 @@ public class GoalPrioritizer {
 
         this.goals = processedGoals;
 
-        if(resetCounter % 2 == 0){
-            prioritizeNode(level);
-        }
+//        if(resetCounter % 2 == 0){
+//            prioritizeNode(level);
+//        }
 
         this.orderedGoals = colorSort(topSort(this.goals));
     }
@@ -399,142 +399,142 @@ public class GoalPrioritizer {
 		}
     }
     
-    public void prioritizeNode(Level lvl)
-    {
-    	fillOutNode(lvl);
-
-    	Node startNode = lvl.graph.getLargestNode();
-        if(startNode == null){
-            return;
-        }
-    	ArrayDeque<Goal> goalQueue = new ArrayDeque<>();
-    	
-    	for(Edge edge : lvl.graph.edgeList)
-    	{    		
-    		edgeMap.put(edge, new EdgeGoal(null, edge, new ArrayList<>()));
-    	}
-    	
-    	for(Node node : lvl.graph.nodeList)
-    	{
-    		nodeMap.put(node, new NodeGoal(null, node));
-    		
-    		for(Goal goal : node.getGoals()){
-    			nodeMap.get(node).addDependencyTo(goal);
-    		}
-    	}
-    	
-    	visitNode(nodeMap.get(startNode), lvl, null, new ArrayList<>());
-    	
-    	for(EdgeGoal eg : edgeMap.values())
-    	{
-            if(eg.edge.next == null){
-                logger.error("next null");
-                continue;
-            }
-    		List<Box> tempBoxes = new ArrayList(eg.edge.next.getBoxes());    		
-    		if(tempBoxes == null) continue;
-    		
-    		for(Box box : tempBoxes)
-    		{
-				edgeMap.get(eg.edge).addBox(box);			
-    		}
-    		
-    		for(Square square : eg.edge.edges.values())
-    		{    			
-    			for(Goal goal : goals)
-    			{
-    				GoalField goalField = ((MoveGoal)goal).getGoalField();
-    				
-    				if(goalField.equals(square))
-    				{
-    					goal.addDependencyTo(eg);
-    				}
-    			}
-    		}
-    	}
-    	
-    	for(EdgeGoal ed : edgeMap.values())
-    	{
-    		logger.error(ed.toString() + ed.getNumberOfboxes());
-    	}
-    	
-    	this.goals.addAll(nodeMap.values());
-    	this.goals.addAll(edgeMap.values());
-    }
+//    public void prioritizeNode(Level lvl)
+//    {
+//    	fillOutNode(lvl);
+//
+//    	Node startNode = lvl.graph.getLargestNode();
+//        if(startNode == null){
+//            return;
+//        }
+//    	ArrayDeque<Goal> goalQueue = new ArrayDeque<>();
+//
+//    	for(Edge edge : lvl.graph.edgeList)
+//    	{
+//    		edgeMap.put(edge, new EdgeGoal(null, edge, new ArrayList<>()));
+//    	}
+//
+//    	for(Node node : lvl.graph.nodeList)
+//    	{
+//    		nodeMap.put(node, new NodeGoal(null, node));
+//
+//    		for(Goal goal : node.getGoals()){
+//    			nodeMap.get(node).addDependencyTo(goal);
+//    		}
+//    	}
+//
+//    	visitNode(nodeMap.get(startNode), lvl, null, new ArrayList<>());
+//
+//    	for(EdgeGoal eg : edgeMap.values())
+//    	{
+//            if(eg.edge.next == null){
+//                logger.error("next null");
+//                continue;
+//            }
+//    		List<Box> tempBoxes = new ArrayList(eg.edge.next.getBoxes());
+//    		if(tempBoxes == null) continue;
+//
+//    		for(Box box : tempBoxes)
+//    		{
+//				edgeMap.get(eg.edge).addBox(box);
+//    		}
+//
+//    		for(Square square : eg.edge.edges.values())
+//    		{
+//    			for(Goal goal : goals)
+//    			{
+//    				GoalField goalField = ((MoveGoal)goal).getGoalField();
+//
+//    				if(goalField.equals(square))
+//    				{
+//    					goal.addDependencyTo(eg);
+//    				}
+//    			}
+//    		}
+//    	}
+//
+//    	for(EdgeGoal ed : edgeMap.values())
+//    	{
+//    		logger.error(ed.toString() + ed.getNumberOfboxes());
+//    	}
+//
+//    	this.goals.addAll(nodeMap.values());
+//    	this.goals.addAll(edgeMap.values());
+//    }
+//
+//    public void visitNode(NodeGoal nodeGoal, Level lvl, Edge from, List<NodeGoal> visitNodeGoal)
+//    {
+//    	List<Goal> goalSquares = nodeGoal.node.getGoals();
+//    	List<Element> passingElement = new ArrayList<>();
+//
+//    	Element boxPlaceElement;
+//    	Box tempBox;
+//    	Square tempSquare;
+//
+//    	if(visitNodeGoal.contains(nodeGoal))
+//    	{
+//    		return;
+//    	}
+//
+//    	if(from != null){
+//    		edgeMap.get(from).addDependencyTo(nodeGoal);
+//    		from.next = nodeGoal.node;
+//    	}
+//    	visitNodeGoal.add(nodeGoal);
+//
+//    	/*for(Goal goal : goalSquares)
+//    	{
+//    		tempBox = ((MoveGoal)goal).getBox();
+//    		tempSquare = lvl.getSquare(tempBox.row, tempBox.col);
+//    		boxPlaceElement = lvl.graph.getElement(tempSquare);
+//    		logger.error("boxPlaceElemnt " + boxPlaceElement.getNumber() + " temBox " + tempBox.toString());
+//    		passingElement = lvl.graph.getPath(boxPlaceElement, (Element) nodeGoal.node);
+//    	}*/
+//
+//    	for(Edge edge : nodeGoal.node.getConnectedEdges())
+//    	{
+//    		if(from == null || !from.equals(edge))
+//    		{
+//    			nodeGoal.addDependencyTo(edgeMap.get(edge));
+//
+//    			for(Node node : edge.getConnectedNode())
+//    			{
+//    				edge.prev = nodeGoal.node;
+//    				//edge.next = node;
+//    				visitNode(nodeMap.get(node),lvl,edge,visitNodeGoal);
+//    			}
+//    		}
+//    	}
+//    }
+//
     
-    public void visitNode(NodeGoal nodeGoal, Level lvl, Edge from, List<NodeGoal> visitNodeGoal)
-    {
-    	List<Goal> goalSquares = nodeGoal.node.getGoals();
-    	List<Element> passingElement = new ArrayList<>();
-    	
-    	Element boxPlaceElement;
-    	Box tempBox;
-    	Square tempSquare;
-    	
-    	if(visitNodeGoal.contains(nodeGoal))
-    	{
-    		return;
-    	}
-
-    	if(from != null){
-    		edgeMap.get(from).addDependencyTo(nodeGoal);
-    		from.next = nodeGoal.node;
-    	}
-    	visitNodeGoal.add(nodeGoal);
-    	
-    	/*for(Goal goal : goalSquares)
-    	{
-    		tempBox = ((MoveGoal)goal).getBox();
-    		tempSquare = lvl.getSquare(tempBox.row, tempBox.col);    		
-    		boxPlaceElement = lvl.graph.getElement(tempSquare);
-    		logger.error("boxPlaceElemnt " + boxPlaceElement.getNumber() + " temBox " + tempBox.toString());
-    		passingElement = lvl.graph.getPath(boxPlaceElement, (Element) nodeGoal.node);    		
-    	}*/
-    	
-    	for(Edge edge : nodeGoal.node.getConnectedEdges())
-    	{
-    		if(from == null || !from.equals(edge))
-    		{    			
-    			nodeGoal.addDependencyTo(edgeMap.get(edge));
-    			
-    			for(Node node : edge.getConnectedNode())
-    			{
-    				edge.prev = nodeGoal.node;
-    				//edge.next = node;    				
-    				visitNode(nodeMap.get(node),lvl,edge,visitNodeGoal);
-    			}
-    		}    		
-    	}
-    }   
-    
-    
-    
-    public void fillOutNode(Level lvl)
-    {
-    	List<Node> nodesSF = lvl.graph.getNodeListSmallestFirst(); 
-    	//List<Node> nodes = lvl.graph.getCriticalNode();
-    	
-    	for(int i = 0; i < goals.size(); i++)
-    	{
-    		if(goals.get(i) instanceof MoveGoal)
-    		{
-	    		for(Node node : nodesSF)
-	    		{
-	    			Square tempSquare = ((MoveGoal)goals.get(i)).getGoalField();
-	    			
-	    			if(node.isPartOf(tempSquare))
-	    			{
-	    				node.addGoal(goals.get(i));
-	    			}
-	    			
-	    			Box tempBox = ((MoveGoal)goals.get(i)).getBox();
-	    			tempSquare = lvl.getSquare(tempBox.row, tempBox.col);
-	    			if(node.isPartOf(tempSquare))
-	    			{
-	    				node.addBox(tempBox);
-	    			}
-	    		}
-    		}
-    	}
-    }
+//
+//    public void fillOutNode(Level lvl)
+//    {
+//    	List<Node> nodesSF = lvl.graph.getNodeListSmallestFirst();
+//    	//List<Node> nodes = lvl.graph.getCriticalNode();
+//
+//    	for(int i = 0; i < goals.size(); i++)
+//    	{
+//    		if(goals.get(i) instanceof MoveGoal)
+//    		{
+//	    		for(Node node : nodesSF)
+//	    		{
+//	    			Square tempSquare = ((MoveGoal)goals.get(i)).getGoalField();
+//
+//	    			if(node.isPartOf(tempSquare))
+//	    			{
+//	    				node.addGoal(goals.get(i));
+//	    			}
+//
+//	    			Box tempBox = ((MoveGoal)goals.get(i)).getBox();
+//	    			tempSquare = lvl.getSquare(tempBox.row, tempBox.col);
+//	    			if(node.isPartOf(tempSquare))
+//	    			{
+//	    				node.addBox(tempBox);
+//	    			}
+//	    		}
+//    		}
+//    	}
+//    }
 }

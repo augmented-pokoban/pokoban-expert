@@ -9,10 +9,12 @@ public abstract class Square {
 	public final int row, col;
 	private MinDistance[][] minimumDistance;
 	private boolean isSaveSpot = false;
+	private Level level;
 
-	public Square(int row, int col){
+	public Square(int row, int col, Level level){
 		this.row = row;
 		this.col = col;
+		this.level = level;
 	}
 
 	public abstract Boolean isPassable();
@@ -23,10 +25,10 @@ public abstract class Square {
 
 	public synchronized MinDistance getDistance(int row, int col){
 
-        if(!Level.distances[this.row][this.col]){
+        if(!level.distances[this.row][this.col]){
             minimumDistance = fillMinimumDistances();
             //Flag that it is calculated now
-            Level.distances[this.row][this.col] = true;
+            level.distances[this.row][this.col] = true;
         }
 
         if(this.minimumDistance == null || !isPassable()){
@@ -79,8 +81,8 @@ public abstract class Square {
             return null;
         }
 		//Init minimum distances, queue and insert first element
-		MinDistance[][] distances = new MinDistance[Level.MAX_ROW][Level.MAX_COLUMN];
-		ArrayDeque<MinDistance> queue = new ArrayDeque<MinDistance>(Level.MAX_ROW * Level.MAX_COLUMN);
+		MinDistance[][] distances = new MinDistance[level.MAX_ROW][level.MAX_COLUMN];
+		ArrayDeque<MinDistance> queue = new ArrayDeque<MinDistance>(level.MAX_ROW * level.MAX_COLUMN);
 		distances[this.row][this.col] = new MinDistance(this.row, this.col, 0,null);
 		queue.add(distances[this.row][this.col]);
 
@@ -93,12 +95,12 @@ public abstract class Square {
 				int row = Level.getRow(d, node.row);
 				int col = Level.getCol(d, node.col);
 
-				boolean rowOutOfBounds = row < 0 || row > (Level.MAX_ROW - 1);
-				boolean colOutOfBounds = col < 0 || col > (Level.MAX_COLUMN - 1);
+				boolean rowOutOfBounds = row < 0 || row > (level.MAX_ROW - 1);
+				boolean colOutOfBounds = col < 0 || col > (level.MAX_COLUMN - 1);
 				if(rowOutOfBounds | colOutOfBounds) continue;
 
 				//If no distance is set yet and the given square is passable, continue
-				if (distances[row][col] == null && Level.squares[row][col].isPassable()) {
+                if (distances[row][col] == null && level.squares[row][col].isPassable()) {
 					distances[row][col] = new MinDistance(row, col, node.d + 1,node);
 					queue.add(distances[row][col]);
 				}

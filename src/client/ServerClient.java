@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  */
 public class ServerClient {
     private final ServerAPI server;
-    private static int count = 0;
+    private int count = 0;
 
     public ServerClient(ServerAPI server) throws InvalidMoveException {
         this.server = server;
@@ -41,7 +41,7 @@ public class ServerClient {
         return count;
     }
 
-    public void terminate(boolean completed){
-        this.server.terminateGame(completed,"Moves: " + count);
+    public void terminate(boolean completed, int moves){
+        this.server.terminateGame(completed,"Moves: " + moves);
     }
 }

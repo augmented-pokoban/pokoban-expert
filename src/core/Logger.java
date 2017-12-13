@@ -6,10 +6,10 @@ package core;
 public class Logger {
 
     private String name;
-    private static boolean plan = true;
-    private static boolean global = true;
+    private static boolean plan = false;
+    private static boolean global = false;
     private static boolean info = false;
-    private static boolean error = true;
+    private static boolean error = false;
     private static boolean goal = false;
 
     public Logger(String name){

@@ -2,6 +2,7 @@ package search;
 
 import core.Agent;
 import core.Logger;
+import map.MinDistance;
 import map.Square;
 
 import java.util.Comparator;
@@ -109,10 +110,16 @@ public abstract class Heuristic implements Comparator<Node> {
                     agentDist = n.expectedAgentPlacement.getDistance(agent.getRow(), agent.getCol()).d;
                 }
 
-                return goal.getDistance(from.row, from.col).d
-                        + n.state.getLevel()
+                MinDistance minGoal = goal.getDistance(from.row, from.col);
+                MinDistance minBox = n.state.getLevel()
                         .getSquare(agent.getRow(), agent.getCol())
-                        .getDistance(from.row, from.col).d - 1
+                        .getDistance(from.row, from.col);
+
+                int goalDist = minGoal == null ? 20 : minGoal.d;
+                int boxDist = minBox == null ? 20 : minBox.d;
+
+                return goalDist
+                        +  boxDist - 1
                         + agentDist;
 
             case AgentOutOfTheWay: return n.g();

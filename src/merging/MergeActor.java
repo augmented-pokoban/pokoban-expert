@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 public class MergeActor extends AbstractActor {
 
     private final PlanMerger planner;
+    private boolean allCompleted = false;
 
     public static Props props(List<Agent> agents, List<Box> boxes, Level level, ServerClient client){
         return Props.create(MergeActor.class, new Creator<MergeActor>() {
@@ -56,11 +57,22 @@ public class MergeActor extends AbstractActor {
                     sender().tell(new InitMessage(planner.boxes, planner.resources, msg.agents, planner.agents), self());
                 })
                 .match(AllCompletedMessage.class, m -> {
+                    if(allCompleted){
+                        getContext()
+                                .system()
+                                .terminate();
+                        return;
+                    }
+
+                    allCompleted = true;
 
                     try {
                         boolean completed = planner.commitRest();
 
-                        System.out.println("AllCompletedMessage in Merger. Level completed: " + completed);
+                        if(!completed){
+                            System.out.println("AllCompletedMessage in Merger. Level completed: " + completed);
+                        }
+
                         planner.printAgentStatus();
 
                         if (!completed) {
@@ -70,8 +82,10 @@ public class MergeActor extends AbstractActor {
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        getContext()
+                                .system()
+                                .terminate();
                     }
-
                 })
                 .match(StillNotWorkingMessage.class, msg -> {
                     try {

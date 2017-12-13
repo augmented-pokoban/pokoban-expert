@@ -7,6 +7,7 @@ import core.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public class ServerAPI {
 
     private String gameID;
-    private static final String BASE_API = "http://localhost:8080/pokoban-server/api/";
+    private static final String BASE_API = "http://localhost:5000/api/";
     private JSONObject lastMoveResult;
 
     /**
@@ -28,7 +29,7 @@ public class ServerAPI {
 
         try{
             JSONObject result = Unirest
-                    .post(BASE_API + "pokoban/supervised/" + levelFile)
+                    .post(BASE_API + "pokoban/" + levelFile.replaceAll("/","_"))
                     .asJson()
                     .getBody()
                     .getObject();
@@ -54,10 +55,13 @@ public class ServerAPI {
      * @return
      */
     boolean performAction(Command action){
-
+        if(this.gameID == null) {
+            System.err.println("Game already terminated on performAction. Illegal move...");
+            return false;
+        }
         try{
             this.lastMoveResult  = Unirest
-                    .put(BASE_API + "pokoban/" + this.gameID + "/" + action.toString())
+                    .put(BASE_API + "pokoban/" + this.gameID + "/" + action.toString().replace("Push","Move"))
                     .asJson()
                     .getBody()
                     .getObject();
@@ -79,32 +83,37 @@ public class ServerAPI {
      * Terminates a game
      */
     public void terminateGame(boolean completed, String description){
-        if(this.gameID == null) return;
+        if(this.gameID == null) {
+            return;
+        }
 
         // Connect api and kill game
         try {
-            JSONObject obj = Unirest.delete(BASE_API + "pokoban/" + this.gameID + "?store=true&is_planner=true&description=" + description)
+            JSONObject obj = Unirest.delete(BASE_API + "pokoban/" + this.gameID
+                    + "?store=true&is_planner=true&description=" + URLEncoder.encode(description, "UTF-8"))
                     .asJson()
                     .getBody()
                     .getObject();
-        } catch (UnirestException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         this.gameID = null;
     }
 
-    public static List<String> getLevels() throws Exception{
+    public static List<String> getLevels(int skip, int limit) throws Exception{
 
         List<String> list = new ArrayList<>();
 
-        JSONArray array = Unirest.get(BASE_API + "levels/supervised")
+        JSONObject obj = Unirest.get(BASE_API + "levels/supervised?skip="+skip+"&limit=" + limit)
                 .asJson()
                 .getBody()
-                .getArray();
+                .getObject();
 
-        for (int i = 0; i < array.length(); i++) {
-            list.add(array.getString(i));
+        JSONArray levels = obj.getJSONArray("data");
+
+        for (int i = 0; i < levels.length(); i++) {
+            list.add(levels.getJSONObject(i).getString("relativePath"));
         }
 
         return list;

@@ -52,7 +52,7 @@ public class Client {
                 colors.put( id.trim().charAt( 0 ), color );
             }
         }
-//
+
 //        while ( ( line = serverMessages.readLine() ).matches( "^[a-z]+:\\s*[0-9A-Z](,\\s*[0-9A-Z])*\\s*$" ) ) {
 //            line = line.replaceAll( "\\s", "" );
 //            String[] colonSplit = line.split( ":" );
@@ -153,10 +153,17 @@ public class Client {
         Client client = new Client(level);
 
         Logger.global(Memory.stringRep());
-        ActorSystem system = ActorSystem.create("aimuffins");
+        ActorSystem system = ActorSystem.create("thread_" + args[1] + "_aimuffins");
         system.actorOf(PlannerActor.props(client.agents, client.level, client.boxes, new ServerClient(server)));
 
-        Await.result(system.whenTerminated(), Duration.create(5, TimeUnit.MINUTES));
+        try{
+            Await.result(system.whenTerminated(), Duration.create(15, TimeUnit.SECONDS));
+        } catch(Exception e){
+            System.err.println("Terminating system for level " + args[0]);
+            system.terminate();
+            server.terminateGame(false, "Timeout");
+        }
+
     }
 }
 

@@ -86,7 +86,11 @@ public class PlanMerger {
         logger.plan("Merge completed. Agent now at: " + agentWrapper.getAgent() + " in time " + agentWrapper.getTime());
 
         List<Command[]> result = this.commands.getCommittableCommands();
-        commitCommands(result);
+        try {
+            commitCommands(result);
+        } catch(InvalidMoveException e) {
+            client.terminate(false, 0);
+        }
 
         //Retrieve agent again. It might have been updated at this point, thus we need a new pointer.
         State nextState = new State(agentWrapper.getAgent(), level, boxes, resources, agentWrapper.getTime(), agents, false);
@@ -262,9 +266,14 @@ public class PlanMerger {
     }
 
     public boolean commitRest(){
-
-        boolean result = commitCommands(this.commands.getRestOfCommands());
-        client.terminate(result);
+        boolean result = false;
+        try {
+             result = commitCommands(this.commands.getRestOfCommands());
+        }catch (InvalidMoveException e) {
+            System.out.println("Invalid move received");
+        } finally {
+            client.terminate(result, this.commands.getLowestAgentCount() + 1);
+        }
 
         return result;
     }
@@ -282,7 +291,7 @@ public class PlanMerger {
         return new State(wrapper.getAgent(), level, boxes, resources, wrapper.getTime(), agents, false);
     }
 
-    private boolean commitCommands(List<Command[]> commands){
+    private boolean commitCommands(List<Command[]> commands) throws InvalidMoveException {
         if (commands != null) {
             int time = client.getCount();
             //Execute commands here
@@ -291,20 +300,12 @@ public class PlanMerger {
             for (int i = 0; i < size; i++) {
 //                logger.info("Conducting moveBox i: " + (time + i));
 
-                try{
-                    result = client.move(commands.get(i));
-                } catch(InvalidMoveException e){
-                    System.out.println("InvalidMove Received");
-                    /*
-                    for(int j = 0; j < client.getCount() + 1; j++){
-                        logger.error("Resources in time " + j + ":");
 
-                        for(Square res : resources.getResources(j)){
-                            logger.error("\t\t" + res);
-                        }
-                    } */
+                result = client.move(commands.get(i));
+
+                if(client.getCount() > 500){
+                    throw new InvalidMoveException();
                 }
-
             }
 
             logger.plan("# of moves: " + client.getCount() + " : Completed: " + result);

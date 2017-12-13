@@ -2,8 +2,8 @@ package map;
 
 public class Wall extends Square {
 
-	public Wall(int row, int col){
-		super(row,col);
+	public Wall(int row, int col, Level level){
+		super(row,col, level);
 	}
 
 	@Override

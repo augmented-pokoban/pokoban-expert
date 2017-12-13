@@ -61,7 +61,6 @@ public class AgentPlanner {
 			System.exit(0);
 		}
 
-
 		return new CompletedPlan(cp);
 	}
 

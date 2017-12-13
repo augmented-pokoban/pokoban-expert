@@ -58,8 +58,11 @@ public class PlannerActor extends AbstractActor {
             this.goalPrioritizer = new GoalPrioritizer(level, boxes);
             goalPrioritizer.print();
         } catch(Exception e){
-            e.printStackTrace();
-            System.exit(0);
+            System.out.println("Error in goal prioritizer - terminating");
+            getContext()
+                    .system()
+                    .terminate();
+            return;
         }
 
 
@@ -109,7 +112,9 @@ public class PlannerActor extends AbstractActor {
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
-                            System.exit(0);
+                            getContext()
+                                    .system()
+                                    .terminate();
                         }
 
                     }
@@ -184,7 +189,9 @@ public class PlannerActor extends AbstractActor {
                         });
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.exit(0);
+                        getContext()
+                                .system()
+                                .terminate();
                     }
                 })
                 .match(IncompleteSolutionMessage.class, msg -> {
@@ -199,8 +206,6 @@ public class PlannerActor extends AbstractActor {
 
                 })
                 .match(AllCompletedMessage.class, m -> {
-                    System.out.println("Terminating");
-
                     getContext()
                             .system()
                             .terminate();
@@ -265,9 +270,7 @@ public class PlannerActor extends AbstractActor {
             if(goalPrioritizer.allCompletedForAgent(state)){
                 //Update the latest the agent was working in
                 agentStatus[agentNumber] = AgentStatus.Completed;
-//                agentCompleted[agentNumber] = true;
-//                workingAgents[agentNumber] = false;
-//                replanningAgents[agentNumber] = false;
+
                 logger.plan("Agent " + state.getAgent() + " completed all actions in time " + state.time + ".");
                 checkIfAllCompleted();
             } else {
@@ -330,10 +333,10 @@ public class PlannerActor extends AbstractActor {
             merger.tell(new GetNewestStateMessage(), self());
             goalPrioritizer.resetTopSort(state, true);
 
-            if(SearchClient.max_depth == 3000){
+            if(SearchClient.max_depth > 500){
                 logger.plan("Telling merger to commit all anyway.");
                 this.merger.tell(new AllCompletedMessage(), self());
-                System.exit(0);
+
             } else {
                 requestStatesForNonWorkingAgents(0);
             }

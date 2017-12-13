@@ -9,13 +9,13 @@ import java.util.*;
 
 public class Level {
 
-    protected static Square[][] squares;
-    public static int MAX_ROW;
-    public static int MAX_COLUMN;
-    public static  ArrayList<GoalField> goals;
-    protected static boolean[][] distances;
+    protected Square[][] squares;
+    public final int MAX_ROW;
+    public final int MAX_COLUMN;
+    public  ArrayList<GoalField> goals;
+    protected boolean[][] distances;
 
-    public Graph graph;
+//    public Graph graph;
     
     /**
      * Use this constructor only ONCE to set the map. Use the other constructor when adding a new set of boxes.
@@ -31,9 +31,9 @@ public class Level {
         distances = new boolean[MAX_ROW][MAX_COLUMN];
 
         loadSquares(walls, goals, colors);
-        graph = new Graph(this, squares);
-        graph.printgraph();
-        graph.getNodeListSmallestFirst();
+//        graph = new Graph(this, squares);
+//        graph.printgraph();
+//        graph.getNodeListSmallestFirst();
     }
 
     public Square getSquare(int row, int col) {
@@ -130,13 +130,13 @@ public class Level {
         for (int row = 0; row < MAX_ROW; row++) {
             for (int col = 0; col < MAX_COLUMN; col++) {
                 if (walls[row][col]) {
-                    this.squares[row][col] = new Wall(row, col);
+                    this.squares[row][col] = new Wall(row, col, this);
                 } else if (goals[row][col] > 0) {
-                    GoalField goal = new GoalField(row, col, goals[row][col], colors.get(Character.toUpperCase(goals[row][col])));
+                    GoalField goal = new GoalField(row, col, goals[row][col], colors.get(Character.toUpperCase(goals[row][col])), this);
                     this.squares[row][col] = goal;
                     this.goals.add(goal);
                 } else {
-                    this.squares[row][col] = new Field(row, col);
+                    this.squares[row][col] = new Field(row, col, this);
                 }
             }
         }
