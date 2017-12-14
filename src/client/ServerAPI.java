@@ -7,6 +7,7 @@ import core.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.SocketTimeoutException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,26 +102,56 @@ public class ServerAPI {
         this.gameID = null;
     }
 
-    public static List<String> getLevels(int skip, int limit) throws Exception{
+    public static String getLastID() throws Exception{
+        // Get the latest saves id
 
-        List<String> list = new ArrayList<>();
-
-        JSONObject obj = Unirest.get(BASE_API + "levels/supervised?skip="+skip+"&limit=" + limit)
+        String level = Unirest.get(BASE_API + "pokoban/saves?limit=1")
                 .asJson()
                 .getBody()
-                .getObject();
+                .getObject()
+                .getJSONArray("data")
+                .getJSONObject(0)
+                .getString("level");
 
-        JSONArray levels = obj.getJSONArray("data");
-
-        for (int i = 0; i < levels.length(); i++) {
-            list.add(levels.getJSONObject(i).getString("relativePath"));
-        }
-
-        return list;
-
+        return transformLevelID(level);
     }
 
+    public static String transformLevelID(String level){
+        if(level.contains("/")){
+            int index = level.lastIndexOf("/");
+            return level.substring(index + 1);
+        } else {
+            return level;
+        }
+    }
 
+    public static List<String> getLevels(int skip, int limit, String lastID) throws Exception{
+        return getLevels(skip, limit, lastID, 1);
+    }
 
+    private static List<String> getLevels(int skip, int limit, String lastID, int retry) throws Exception{
+        try{
+            List<String> list = new ArrayList<>();
 
+            JSONObject obj = Unirest.get(BASE_API + "levels/supervised?skip="+skip+"&limit=" + limit + "&last_id=" + lastID)
+                    .asJson()
+                    .getBody()
+                    .getObject();
+
+            JSONArray levels = obj.getJSONArray("data");
+
+            for (int i = 0; i < levels.length(); i++) {
+                list.add(levels.getJSONObject(i).getString("relativePath"));
+            }
+
+            return list;
+
+        } catch(Exception e){
+            if(retry < 5){
+                Thread.sleep(5000);
+                return getLevels(skip, limit, lastID, retry + 1);
+            }
+        }
+        throw new Exception("Retries didn't help");
+    }
 }

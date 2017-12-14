@@ -7,22 +7,21 @@ import java.util.Stack;
 
 public class ThreadSafeAPI implements Iterator<String> {
 
-    private int next;
+    private String lastID;
     private final int step;
-    private final int max;
+    private boolean hasMore = true;
     private Stack<String> items;
 
-    public ThreadSafeAPI(int next, int step, int max) {
+    public ThreadSafeAPI(int step, String lastID) {
         this.step = step;
-        this.max = max;
-        this.next = next;
+        this.lastID = lastID;
         this.items = new Stack<>();
         this.loadNext();
     }
 
     @Override
     public synchronized boolean hasNext() {
-        return this.next < this.max || !this.items.isEmpty();
+        return this.hasMore || !this.items.isEmpty();
     }
 
     @Override
@@ -32,7 +31,7 @@ public class ThreadSafeAPI implements Iterator<String> {
             return null;
         }
 
-        if(this.items.isEmpty() && this.next < this.max){
+        if(this.items.isEmpty() && this.hasMore){
             this.loadNext();
         }
 
@@ -40,10 +39,12 @@ public class ThreadSafeAPI implements Iterator<String> {
     }
 
     private void loadNext() {
-        System.out.println("Retrieving next: " + next + ", limit: " + this.step + " with max: " + max);
+        System.out.println("Retrieving next ID: " + lastID + ", limit: " + this.step);
         try {
-            this.items.addAll(ServerAPI.getLevels(this.next, this.step));
-            this.next += this.step;
+            Thread.sleep(10000);
+            this.items.addAll(ServerAPI.getLevels(0, this.step, lastID));
+            this.hasMore = this.items.size() == this.step; //Assumes that if the full set is returned, there is more
+            this.lastID = ServerAPI.transformLevelID(this.items.lastElement());
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
